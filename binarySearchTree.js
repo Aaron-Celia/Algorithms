@@ -60,4 +60,83 @@ class BinarySearchTree {
 
 		return data;
 	}
+
+	depthFirstSearch() {
+		let node = this.root,
+			data = [],
+			queue = [];
+
+		queue.push(node);
+
+		while (queue.length) {
+			node = queue.shift();
+			data.push(node.val);
+			if (node.left) {
+				queue.push(node.left);
+			} else if (node.right) {
+				queue.push(node.right);
+			}
+		}
+		return data;
+	}
+
+	find(val) {
+		let node = this.root;
+
+		while (node) {
+			if (val < node.val) {
+				node = node.left;
+			} else if (val > node.val) {
+				node = node.right;
+			} else {
+				return node;
+			}
+		}
+		return null;
+	}
+
+	getRoot() {
+		return this.root;
+	}
+
+	inOrderTraversal(node) {
+		const data = [];
+		const traverse = (node) => {
+			if (node) {
+				traverse(node.left);
+				data.push(node.val);
+				traverse(node.right);
+			}
+		};
+		traverse(node);
+		return data;
+	}
+
+	preOrderTraversal(node) {
+		const data = [];
+
+		const traverse = (node) => {
+			if (node) {
+				data.push(node.val);
+				traverse(node.left);
+				traverse(node.right);
+			}
+		};
+		traverse(node);
+		return data;
+	}
+
+	postOrderTraversal(node) {
+		const data = [];
+
+		const traverse = (node) => {
+			if (node) {
+				traverse(node.left);
+				traverse(node.right);
+				data.push(node.val);
+			}
+		};
+		traverse(node);
+		return data;
+	}
 }
